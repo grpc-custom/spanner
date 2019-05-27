@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package spanner.ddl;
 
-option go_package = "github.com/grpc-custom/spanner/proto";
+option go_package = "github.com/grpc-custom/spanner/protoc-gen-spanner-ddl/plugin";
 
 import "google/protobuf/descriptor.proto";
 

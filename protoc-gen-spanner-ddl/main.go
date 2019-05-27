@@ -10,9 +10,9 @@ import (
 	"github.com/golang/protobuf/proto"
 	gogenerator "github.com/golang/protobuf/protoc-gen-go/generator"
 	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
-	options "github.com/grpc-custom/spanner/proto"
 	"github.com/grpc-custom/spanner/protoc-gen-spanner-ddl/ddl"
 	"github.com/grpc-custom/spanner/protoc-gen-spanner-ddl/descriptor"
+	options "github.com/grpc-custom/spanner/protoc-gen-spanner-ddl/plugin"
 )
 
 func parseParameter(parameter string) {
