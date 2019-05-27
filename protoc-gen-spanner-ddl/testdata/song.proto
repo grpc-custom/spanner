@@ -32,5 +32,4 @@ message Song {
   int64    album_id   = 2;
   int64    track_id   = 3;
   string   song_name  = 4 [(spanner.ddl.column) = { nullable: true }];
-  repeated string ids = 5;
 }
