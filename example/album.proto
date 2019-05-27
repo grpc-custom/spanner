@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package test;
+
+import "github.com/grpc-custom/spanner/ddl.proto";
+
+message Album {
+  option (spanner.ddl.schema) = {
+    table: "Albums"
+    index {
+      name: "AlbumsByAlbumTitle"
+      columns: "AlbumTitle"
+      storing: "MarketingBudget"
+    }
+    index {
+      name: "AlbumsByUniqueAlbumId"
+      columns: "AlbumId"
+      unique: true
+    }
+    primary_key: "SingerId, AlbumId"
+    interleave {
+      name: "Singers"
+      on_delete: CASCADE
+    }
+  };
+  int64  id               = 1 [(spanner.ddl.column) = { name: "SingerId" }];
+  int64  album_id         = 2;
+  string album_title      = 3 [(spanner.ddl.column) = { nullable: true }];
+  int64  marketing_budget = 4 [(spanner.ddl.column) = { nullable: true }];
+}

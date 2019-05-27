@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package test;
+
+import "google/protobuf/timestamp.proto";
+import "google/type/date.proto";
+import "github.com/grpc-custom/spanner/ddl.proto";
+
+message Common {
+  google.protobuf.Timestamp created_at = 1
+      [(spanner.ddl.column) = { allow_commit_timestamp: true }];
+  google.protobuf.Timestamp updated_at = 2
+      [(spanner.ddl.column) = { allow_commit_timestamp: true }];
+  google.type.Date issued_at = 3;
+}

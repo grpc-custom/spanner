@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package test;
+
+import "github.com/grpc-custom/spanner/ddl.proto";
+
+message Singer {
+  option (spanner.ddl.schema) = {
+    table: "Singers"
+    index {
+      name: "SingersByFirstLastName"
+      columns: "FirstName, LastName"
+    }
+    index {
+      name: "SingersByFirstLastNameNoNulls"
+      columns: "FirstName, LastName"
+      null_filtered: true
+    }
+    primary_key: "SingerId"
+  };
+  int64  id          = 1 [(spanner.ddl.column) = { name: "SingerId" }];
+  string first_name  = 2 [(spanner.ddl.column) = { length: 1024 }];
+  string last_name   = 3 [(spanner.ddl.column) = { length: 1024 nullable: true }];
+  bytes  singer_info = 4 [(spanner.ddl.column) = { nullable: true }];
+}
