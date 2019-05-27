@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package spanner.ddl;
+
+option go_package = "github.com/grpc-custom/spanner/proto";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MessageOptions {
+  Schema schema = 88264;
+}
+
+extend google.protobuf.FieldOptions {
+  Column column = 88264;
+}
+
+message Schema {
+  string     database    = 1;
+  string     table       = 2;
+  string     primary_key = 3;
+  Interleave interleave  = 4;
+  repeated Index index   = 5;
+  repeated Import import = 6;
+}
+
+enum OnDelete {
+  NONE      = 0;
+  CASCADE   = 1;
+  NO_ACTION = 2;
+}
+
+message Interleave {
+  string   name      = 1;
+  OnDelete on_delete = 2;
+}
+
+message Index {
+  string name          = 1;
+  string columns       = 2;
+  bool   null_filtered = 3;
+  bool   unique        = 4;
+  string storing       = 5;
+  string interleave    = 6;
+}
+
+message Import {
+  string path = 1;
+  string type = 2;
+}
+
+message Column {
+  string name                   = 1;
+  int32  length                 = 2;
+  bool   nullable               = 3;
+  bool   allow_commit_timestamp = 4;
+}
